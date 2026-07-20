@@ -1,14 +1,15 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { STORAGE_KEYS } from "../constants/storageKeys";
 
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light";
+    return localStorage.getItem(STORAGE_KEYS.THEME) || "light";
   });
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
+    localStorage.setItem(STORAGE_KEYS.THEME, theme);
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
